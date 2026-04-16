@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom classes for the specific project look */
+.font-drama {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.font-telemetry {
+  font-family: "Fira Code", monospace;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
