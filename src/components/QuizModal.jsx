@@ -114,7 +114,7 @@ export default function QuizModal({ isOpen, onClose, intent }) {
                      {intent === 'coaching' && (
                         <div className="bg-base p-8 rounded-2xl border border-gray-200">
                            <h4 className="font-bold text-2xl mb-4">NEXUS Coaching Support</h4>
-                           <p className="text-sm opacity-80 mb-4">{t("Plan", "Plan")} {result.id} {t("+ Ajustes + 4 Consultas/mes", "+ Adjustments + 4 Consultations/mo")}</p>
+                           <p className="text-sm opacity-80 mb-4">{t("Manual PDF + Plan", "PDF Manual + Plan")} {result.id} {t("+ Ajustes + 4 Consultas/mes", "+ Adjustments + 4 Consultations/mo")}</p>
                            <div className="text-4xl font-outfit font-bold mb-6"><span className="text-xl mr-1">$</span>{NEXUS_PRICING.coaching}<span className="text-xl">/{t("mes", "mo")}</span></div>
                            <button onClick={() => proceedToCheckout({ type: 'coaching', price: NEXUS_PRICING.coaching })} className="w-full bg-primary text-white py-4 rounded-full font-bold hover:bg-dark transition-colors">
                               {t("Suscribirse Mensualmente", "Subscribe Monthly")}
@@ -125,7 +125,7 @@ export default function QuizModal({ isOpen, onClose, intent }) {
                      {intent === 'elite' && (
                         <div className="bg-dark text-white p-8 rounded-2xl border border-gray-800 shadow-xl">
                            <h4 className="font-bold text-2xl mb-4 text-accent">NEXUS Elite Support</h4>
-                           <p className="text-sm opacity-80 mb-4">{t("Plan", "Plan")} {result.id} {t("+ Adaptación Continua + Consultas Ilimitadas", "+ Cont. Adaptation + Unlimited Consultations")}</p>
+                           <p className="text-sm opacity-80 mb-4">{t("Manual PDF + Plan", "PDF Manual + Plan")} {result.id} {t("+ Adaptación Continua + Consultas Ilimitadas", "+ Cont. Adaptation + Unlimited Consultations")}</p>
                            <div className="text-4xl font-outfit font-bold mb-6"><span className="text-xl mr-1">$</span>{NEXUS_PRICING.elite}<span className="text-xl">/{t("mes", "mo")}</span></div>
                            <button onClick={() => proceedToCheckout({ type: 'elite', price: NEXUS_PRICING.elite })} className="w-full bg-accent text-white py-4 rounded-full font-bold hover:bg-[#A34324] transition-colors">
                               {t("Suscribirse (Priority)", "Subscribe (Priority)")}
