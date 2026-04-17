@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { NEXUS_PRICING } from '../config/pricing';
+import { MANUAL_MAP } from '../config/manuals';
 
 export default function Checkout() {
   const { t, lang } = useLanguage();
@@ -65,6 +66,9 @@ export default function Checkout() {
   };
 
   if (isSuccess) {
+    const profileKey = profile.toLowerCase();
+    const pdfFile = MANUAL_MAP[profileKey]?.[langPref] || `manual-${profileKey}-${langPref}.pdf`;
+
     return (
       <div className="min-h-screen bg-base flex items-center justify-center p-4 relative z-50">
          <div className="bg-white p-12 rounded-[2rem] shadow-2xl text-center max-w-lg">
@@ -77,7 +81,7 @@ export default function Checkout() {
             </p>
             {intent === 'book' && (
               <a 
-                href={`/manuals/manual-${profile.toLowerCase()}-${langPref}.pdf`} 
+                href={`/manuals/${pdfFile}`} 
                 download 
                 className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform mb-4 w-full tracking-wide"
               >
