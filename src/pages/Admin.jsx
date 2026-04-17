@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Download, LayoutDashboard, LogOut, Globe, Book, Users, Settings, Lock, CheckCircle, Eye, RefreshCw } from 'lucide-react';
+import { NEXUS_PRICING } from '../config/pricing';
 
 export default function Admin() {
   const [auth, setAuth] = useState(false);
@@ -54,11 +55,11 @@ export default function Admin() {
 
   const seedData = () => {
     const testData = [
-      { date: new Date().toISOString(), email: 'maria.gonzalez@example.com', profile: 'Foundation', intent: 'book', price: 29, paymentMethod: 'stripe', langPref: 'es' },
-      { date: new Date(Date.now() - 86400000).toISOString(), email: 'john.doe@test.com', profile: 'Performance', intent: 'book', price: 29, paymentMethod: 'paypal', langPref: 'en' },
-      { date: new Date(Date.now() - 172800000).toISOString(), email: 'carlos.ruiz@nexus.com', gender: 'H', dob: '1990-05-15', profile: 'Structure', intent: 'coaching', price: 79, paymentMethod: 'stripe' },
-      { date: new Date(Date.now() - 259200000).toISOString(), email: 'lucia.vazquez@bio.com', gender: 'M', dob: '1985-11-20', profile: 'Explorer', intent: 'elite', price: 199, paymentMethod: 'stripe' },
-      { date: new Date(Date.now() - 345600000).toISOString(), email: 'sergio.marquez@cloud.com', profile: 'Foundation', intent: 'book', price: 29, paymentMethod: 'stripe', langPref: 'es' },
+      { date: new Date().toISOString(), email: 'maria.gonzalez@example.com', profile: 'Foundation', intent: 'book', price: NEXUS_PRICING.book, paymentMethod: 'stripe', langPref: 'es' },
+      { date: new Date(Date.now() - 86400000).toISOString(), email: 'john.doe@test.com', profile: 'Performance', intent: 'book', price: NEXUS_PRICING.book, paymentMethod: 'paypal', langPref: 'en' },
+      { date: new Date(Date.now() - 172800000).toISOString(), email: 'carlos.ruiz@nexus.com', gender: 'H', dob: '1990-05-15', profile: 'Structure', intent: 'coaching', price: NEXUS_PRICING.coaching, paymentMethod: 'stripe' },
+      { date: new Date(Date.now() - 259200000).toISOString(), email: 'lucia.vazquez@bio.com', gender: 'M', dob: '1985-11-20', profile: 'Explorer', intent: 'elite', price: NEXUS_PRICING.elite, paymentMethod: 'stripe' },
+      { date: new Date(Date.now() - 345600000).toISOString(), email: 'sergio.marquez@cloud.com', profile: 'Foundation', intent: 'book', price: NEXUS_PRICING.book, paymentMethod: 'stripe', langPref: 'es' },
     ];
     localStorage.setItem('nexus_sales', JSON.stringify(testData));
     setSales(testData);

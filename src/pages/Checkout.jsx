@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { NEXUS_PRICING } from '../config/pricing';
 
 export default function Checkout() {
   const { t, lang } = useLanguage();
@@ -9,7 +10,7 @@ export default function Checkout() {
   const navigate = useNavigate();
   const profile = state?.profile || "Foundation";
   const intent = state?.intent || "book";
-  const price = state?.product?.price || 29.00;
+  const price = state?.product?.price || NEXUS_PRICING[intent] || NEXUS_PRICING.book;
 
   const [paymentMethod, setPaymentMethod] = useState('stripe');
   const [email, setEmail] = useState('');
