@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Activity, Layers, Shield, Zap } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { NEXUS_PRICING } from '../config/pricing';
 
 export default function QuizModal({ isOpen, onClose, intent }) {
    const navigate = useNavigate();
@@ -103,8 +104,8 @@ export default function QuizModal({ isOpen, onClose, intent }) {
 
                      {intent === 'book' && (
                         <div className="bg-base p-8 rounded-2xl border border-gray-200">
-                           <h4 className="font-bold text-2xl mb-8">{t("Adquirir el manual:", "Acquire manual:")} {result.id} ($29)</h4>
-                           <button onClick={() => proceedToCheckout({ type: 'book', price: 29 })} className="w-full bg-primary text-white py-4 rounded-full font-bold hover:bg-dark transition-colors">
+                           <h4 className="font-bold text-2xl mb-8">{t("Adquirir el manual:", "Acquire manual:")} {result.id} (${NEXUS_PRICING.book})</h4>
+                           <button onClick={() => proceedToCheckout({ type: 'book', price: NEXUS_PRICING.book })} className="w-full bg-primary text-white py-4 rounded-full font-bold hover:bg-dark transition-colors">
                               {t("Comprar libro electrónico", "Buy digital eBook")}
                            </button>
                         </div>
@@ -114,8 +115,8 @@ export default function QuizModal({ isOpen, onClose, intent }) {
                         <div className="bg-base p-8 rounded-2xl border border-gray-200">
                            <h4 className="font-bold text-2xl mb-4">NEXUS Coaching Support</h4>
                            <p className="text-sm opacity-80 mb-4">{t("Plan", "Plan")} {result.id} {t("+ Ajustes + 4 Consultas/mes", "+ Adjustments + 4 Consultations/mo")}</p>
-                           <div className="text-4xl font-outfit font-bold mb-6"><span className="text-xl mr-1">$</span>79<span className="text-xl">/{t("mes", "mo")}</span></div>
-                           <button onClick={() => proceedToCheckout({ type: 'coaching', price: 79 })} className="w-full bg-primary text-white py-4 rounded-full font-bold hover:bg-dark transition-colors">
+                           <div className="text-4xl font-outfit font-bold mb-6"><span className="text-xl mr-1">$</span>{NEXUS_PRICING.coaching}<span className="text-xl">/{t("mes", "mo")}</span></div>
+                           <button onClick={() => proceedToCheckout({ type: 'coaching', price: NEXUS_PRICING.coaching })} className="w-full bg-primary text-white py-4 rounded-full font-bold hover:bg-dark transition-colors">
                               {t("Suscribirse Mensualmente", "Subscribe Monthly")}
                            </button>
                         </div>
@@ -125,8 +126,8 @@ export default function QuizModal({ isOpen, onClose, intent }) {
                         <div className="bg-dark text-white p-8 rounded-2xl border border-gray-800 shadow-xl">
                            <h4 className="font-bold text-2xl mb-4 text-accent">NEXUS Elite Support</h4>
                            <p className="text-sm opacity-80 mb-4">{t("Plan", "Plan")} {result.id} {t("+ Adaptación Continua + Consultas Ilimitadas", "+ Cont. Adaptation + Unlimited Consultations")}</p>
-                           <div className="text-4xl font-outfit font-bold mb-6"><span className="text-xl mr-1">$</span>199<span className="text-xl">/{t("mes", "mo")}</span></div>
-                           <button onClick={() => proceedToCheckout({ type: 'elite', price: 199 })} className="w-full bg-accent text-white py-4 rounded-full font-bold hover:bg-[#A34324] transition-colors">
+                           <div className="text-4xl font-outfit font-bold mb-6"><span className="text-xl mr-1">$</span>{NEXUS_PRICING.elite}<span className="text-xl">/{t("mes", "mo")}</span></div>
+                           <button onClick={() => proceedToCheckout({ type: 'elite', price: NEXUS_PRICING.elite })} className="w-full bg-accent text-white py-4 rounded-full font-bold hover:bg-[#A34324] transition-colors">
                               {t("Suscribirse (Priority)", "Subscribe (Priority)")}
                            </button>
                         </div>

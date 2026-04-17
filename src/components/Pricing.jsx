@@ -1,13 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { NEXUS_PRICING } from '../config/pricing';
 
 export default function Pricing({ onOpenQuiz }) {
   const { t } = useLanguage();
 
   const plans = [
-    { name: 'Manual PDF', price: '29', features: [t('Integración 5 pilares', '5 pillars integration'), t('Estrategia personalizada según perfil', 'Personalized strategy by profile'), t('Formato digital descargable', 'Downloadable digital format')], highlighted: false, intent: 'book', cta: t('Adquirir', 'Acquire') },
-    { name: 'Coaching Support', price: '79', features: [t('Plan adaptado mensual', 'Adapted monthly plan'), t('Revisión y seguimiento por equipo', 'Team review and tracking'), t('4 consultas por mes', '4 consultations per month')], highlighted: true, intent: 'coaching', cta: t('Suscribirse', 'Subscribe') },
-    { name: 'Elite Support', price: '199', features: [t('Mapeo biológico completo', 'Complete biological mapping'), t('Seguimiento semanal', 'Weekly tracking'), t('Asesoramiento 24/7 Ilimitado', 'Unlimited 24/7 support')], highlighted: false, intent: 'elite', cta: t('Suscribirse', 'Subscribe') },
+    { name: 'Manual PDF', price: NEXUS_PRICING.book, features: [t('Integración 5 pilares', '5 pillars integration'), t('Estrategia personalizada según perfil', 'Personalized strategy by profile'), t('Formato digital descargable', 'Downloadable digital format')], highlighted: false, intent: 'book', cta: t('Adquirir', 'Acquire') },
+    { name: 'Coaching Support', price: NEXUS_PRICING.coaching, features: [t('Plan adaptado mensual', 'Adapted monthly plan'), t('Revisión y seguimiento por equipo', 'Team review and tracking'), t('4 consultas por mes', '4 consultations per month')], highlighted: true, intent: 'coaching', cta: t('Suscribirse', 'Subscribe') },
+    { name: 'Elite Support', price: NEXUS_PRICING.elite, features: [t('Mapeo biológico completo', 'Complete biological mapping'), t('Seguimiento semanal', 'Weekly tracking'), t('Asesoramiento 24/7 Ilimitado', 'Unlimited 24/7 support')], highlighted: false, intent: 'elite', cta: t('Suscribirse', 'Subscribe') },
   ];
   return (
     <section id="pricing" className="py-32 md:py-48 px-4 md:px-8 bg-base relative z-30">
