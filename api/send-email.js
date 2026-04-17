@@ -1,5 +1,24 @@
 import { Resend } from 'resend';
 
+const MANUAL_MAP = {
+  explorer: {
+    es: 'manual-explorer-es-x9u2v8.pdf',
+    en: 'manual-explorer-en-q7w4p1.pdf'
+  },
+  foundation: {
+    es: 'manual-foundation-es-m1n3b5.pdf',
+    en: 'manual-foundation-en-z6x8c2.pdf'
+  },
+  performance: {
+    es: 'manual-performance-es-h4g7j9.pdf',
+    en: 'manual-performance-en-k2l5m3.pdf'
+  },
+  structure: {
+    es: 'manual-structure-es-w8z1y4.pdf',
+    en: 'manual-structure-en-a5s2d3.pdf'
+  }
+};
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
@@ -8,6 +27,8 @@ export default async function handler(req, res) {
   }
 
   const { email, profile, intent, lang } = req.body;
+  const profileKey = profile.toLowerCase();
+  const pdfFile = MANUAL_MAP[profileKey]?.[lang] || `manual-${profileKey}-${lang}.pdf`;
 
   try {
     const isBook = intent === 'book';
@@ -33,7 +54,7 @@ export default async function handler(req, res) {
                 ? 'Puedes descargar tu manual directamente desde el siguiente enlace (o desde la pantalla de confirmación en la web):' 
                 : 'You can download your manual directly from the following link (or from the confirmation screen on the web):'}
             </p>
-            <a href="https://www.stretchlifetime.com/manuals/manual-${profile.toLowerCase()}-${lang}.pdf" 
+            <a href="https://www.stretchlifetime.com/manuals/${pdfFile}" 
                style="display: inline-block; background: #BA4E2B; color: white; padding: 15px 25px; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: 10px;">
                ${lang === 'es' ? 'Descargar Manual' : 'Download Manual'}
             </a>
