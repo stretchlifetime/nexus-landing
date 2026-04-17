@@ -20,9 +20,33 @@ export default function Checkout() {
   
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleCheckout = (e) => {
+  const handleCheckout = async (e) => {
     e.preventDefault();
     if (!email) return;
+
+    // Send email via our new API
+    try {
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          profile,
+          intent,
+          lang: langPref
+        })
+      }).then(res => {
+        console.log("Status envío email:", res.status);
+        return res.json();
+      }).then(data => {
+        console.log("Respuesta servidor email:", data);
+      }).catch(err => {
+        console.error("Error en el fetch de email:", err);
+      });
+    } catch (err) {
+      console.error("Error enviando email:", err);
+    }
+
     setIsSuccess(true);
     
     const prevData = JSON.parse(localStorage.getItem('nexus_sales') || '[]');
