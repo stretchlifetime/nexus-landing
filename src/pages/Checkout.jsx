@@ -52,7 +52,11 @@ export default function Checkout() {
               {intent === 'book' ? t(" Ya puedes descargar tu manual interactivo a continuación:", " You can now download your interactive manual below:") : t(" Bienvenido al soporte NEXUS. En breve recibirás instrucciones por correo con los primeros pasos para acceder a tu asesoramiento.", " Welcome to NEXUS support. You will shortly receive instructions by email with the first steps to access your advisory.")}
             </p>
             {intent === 'book' && (
-              <a href="#" className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform mb-4 w-full tracking-wide">
+              <a 
+                href={`/manuals/manual-${profile.toLowerCase()}-${langPref}.pdf`} 
+                download 
+                className="inline-block bg-accent text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform mb-4 w-full tracking-wide"
+              >
                  {t("Descargar Manual", "Download Manual")} {profile} ({langPref === 'es' ? 'ES' : 'EN'})
               </a>
             )}
