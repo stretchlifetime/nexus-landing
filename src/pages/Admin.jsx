@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Download, LayoutDashboard, LogOut, Globe, Book, Users, Settings, Lock, CheckCircle } from 'lucide-react';
+import { Download, LayoutDashboard, LogOut, Globe, Book, Users, Settings, Lock, CheckCircle, Eye, RefreshCw } from 'lucide-react';
 
 export default function Admin() {
   const [auth, setAuth] = useState(false);
   const [password, setPassword] = useState('');
   const [sales, setSales] = useState([]);
+  const [visits, setVisits] = useState(0);
   const [activeTab, setActiveTab] = useState('books');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -17,6 +18,8 @@ export default function Admin() {
     if (auth) {
       const data = JSON.parse(localStorage.getItem('nexus_sales') || '[]');
       setSales(data);
+      const v = parseInt(localStorage.getItem('nexus_visits') || '0');
+      setVisits(v);
     }
   }, [auth]);
 
@@ -79,6 +82,13 @@ export default function Admin() {
     setTimeout(() => setPassSuccess(false), 3000);
   };
 
+  const handleResetVisits = () => {
+    if (window.confirm('¿Seguro que quieres resetear el contador de visitas a cero?')) {
+      localStorage.setItem('nexus_visits', '0');
+      setVisits(0);
+    }
+  };
+
   if (!auth) {
     const currentAdminPass = localStorage.getItem('nexus_admin_pass') || 'nexusadmin';
     return (
@@ -119,6 +129,47 @@ export default function Admin() {
             <button onClick={() => setAuth(false)} className="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm shadow-md flex items-center gap-2 hover:bg-dark transition-colors">
               <LogOut size={16} /> Cerrar Sesión
             </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 flex items-center justify-between">
+            <div>
+              <p className="text-primary/40 text-xs font-bold uppercase tracking-widest mb-1">Total Visitas</p>
+              <h3 className="text-4xl font-outfit font-bold">{visits}</h3>
+            </div>
+            <div className="flex flex-col items-end gap-2">
+              <div className="bg-blue-50 text-blue-600 p-4 rounded-2xl">
+                <Eye size={24} />
+              </div>
+              <button 
+                onClick={handleResetVisits}
+                className="text-[10px] font-bold text-red-500 hover:text-red-700 flex items-center gap-1 opacity-60 hover:opacity-100 transition-all uppercase tracking-tighter cursor-pointer"
+                title="Resetear contador"
+              >
+                <RefreshCw size={10} /> Resetear
+              </button>
+            </div>
+          </div>
+          
+          <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 flex items-center justify-between">
+            <div>
+              <p className="text-primary/40 text-xs font-bold uppercase tracking-widest mb-1">Libros Vendidos</p>
+              <h3 className="text-4xl font-outfit font-bold">{books.length}</h3>
+            </div>
+            <div className="bg-accent/10 text-accent p-4 rounded-2xl">
+              <Book size={24} />
+            </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 flex items-center justify-between">
+            <div>
+              <p className="text-primary/40 text-xs font-bold uppercase tracking-widest mb-1">Suscripciones</p>
+              <h3 className="text-4xl font-outfit font-bold">{subs.length}</h3>
+            </div>
+            <div className="bg-green-50 text-green-600 p-4 rounded-2xl">
+              <Users size={24} />
+            </div>
           </div>
         </div>
 

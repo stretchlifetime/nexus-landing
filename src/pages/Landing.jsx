@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Manifesto from '../components/Manifesto';
@@ -16,6 +16,12 @@ export default function Landing() {
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [quizIntent, setQuizIntent] = useState('book'); // book | coaching | elite
+
+  useEffect(() => {
+    // Increment visit counter on page load
+    const currentVisits = parseInt(localStorage.getItem('nexus_visits') || '0');
+    localStorage.setItem('nexus_visits', (currentVisits + 1).toString());
+  }, []);
 
   const openQuiz = (intent = 'book') => {
     setQuizIntent(intent);
