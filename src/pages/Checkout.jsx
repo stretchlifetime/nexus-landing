@@ -104,7 +104,7 @@ export default function Checkout() {
              <h3 className="font-telemetry text-accent text-sm font-bold tracking-widest mb-8">{t("RESUMEN PEDIDO", "ORDER SUMMARY")}</h3>
              <div className="text-3xl font-outfit font-bold mb-2 leading-tight">{intent === 'book' ? `${t("Manual", "Manual")}: ${profile}` : `NEXUS ${intent === 'elite' ? 'Elite' : 'Coaching'}`}</div>
              <div className="opacity-60 text-sm">{intent === 'book' ? t('Libro digital PDF Interactivo', 'Interactive PDF Digital Book') : t('Suscripción mensual de ajuste', 'Monthly tuning subscription')}</div>
-             <div className="text-5xl font-light mt-10 tracking-tighter">${price}</div>
+             <div className="text-5xl font-light mt-10 tracking-tighter">${price}{intent !== 'book' && <span className="text-xl ml-1 opacity-60">/{t('mes', 'mo')}</span>}</div>
           </div>
           
           <div className="w-full md:w-2/3 bg-white p-8 md:p-12 rounded-[2rem] shadow-xl border border-gray-100">
@@ -156,7 +156,7 @@ export default function Checkout() {
                 </div>
 
                 <button type="submit" className="w-full bg-accent text-white py-5 rounded-xl font-bold text-lg hover:bg-[#A34324] transition-colors mt-8 shadow-xl shadow-accent/20">
-                   {t("Completar Pago Seguro", "Complete Secure Payment")} (${price})
+                   {t("Completar Pago Seguro", "Complete Secure Payment")} (${price}{intent !== 'book' && `/${t('mes', 'mo')}`})
                 </button>
              </form>
           </div>
