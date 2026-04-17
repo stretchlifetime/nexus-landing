@@ -1,6 +1,6 @@
 export const NEXUS_PRICING = {
   book: 29.00,
-  coaching: 79.00,
+  coaching: 99.00,
   elite: 199.00
 };
 
