@@ -4,6 +4,7 @@ import { CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { NEXUS_PRICING } from '../config/pricing';
 import { MANUAL_MAP } from '../config/manuals';
+import TermsModal from '../components/TermsModal';
 
 export default function Checkout() {
   const { t, lang } = useLanguage();
@@ -19,11 +20,13 @@ export default function Checkout() {
   const [gender, setGender] = useState('');
   const [dob, setDob] = useState('');
   
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email || !acceptedTerms) return;
 
     // Send email via our new API
     try {
@@ -155,12 +158,38 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                <button type="submit" className="w-full bg-accent text-white py-5 rounded-xl font-bold text-lg hover:bg-[#A34324] transition-colors mt-8 shadow-xl shadow-accent/20">
+                <div className="flex items-start gap-3 mt-8">
+                  <input 
+                    type="checkbox" 
+                    id="terms" 
+                    required 
+                    checked={acceptedTerms} 
+                    onChange={e => setAcceptedTerms(e.target.checked)}
+                    className="mt-1 w-5 h-5 accent-accent cursor-pointer"
+                  />
+                  <label htmlFor="terms" className="text-sm text-primary/70 leading-relaxed cursor-pointer select-none">
+                    {t("He leído y acepto los", "I have read and accept the")}{' '}
+                    <button 
+                      type="button"
+                      onClick={() => setIsTermsOpen(true)}
+                      className="text-primary font-bold underline hover:text-accent transition-colors"
+                    >
+                      {t("términos legales y condiciones de compra", "legal terms and purchase conditions")}
+                    </button>
+                  </label>
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={!acceptedTerms}
+                  className={`w-full py-5 rounded-xl font-bold text-lg transition-all mt-8 shadow-xl ${acceptedTerms ? 'bg-accent text-white hover:bg-[#A34324] shadow-accent/20' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
+                >
                    {t("Completar Pago Seguro", "Complete Secure Payment")} (${price}{intent !== 'book' && `/${t('mes', 'mo')}`})
                 </button>
              </form>
           </div>
        </div>
+       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
     </div>
   )
 }
