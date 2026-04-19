@@ -181,10 +181,10 @@ export default function Checkout() {
 
                 <button 
                   type="submit" 
-                  disabled={!acceptedTerms}
-                  className={`w-full py-5 rounded-xl font-bold text-lg transition-all mt-8 shadow-xl ${acceptedTerms ? 'bg-accent text-white hover:bg-[#A34324] shadow-accent/20' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
+                  disabled={true}
+                  className="w-full py-5 rounded-xl font-bold text-lg transition-all mt-8 shadow-xl bg-gray-200 text-gray-400 cursor-not-allowed"
                 >
-                   {t("Completar Pago Seguro", "Complete Secure Payment")} (${price}{intent !== 'book' && `/${t('mes', 'mo')}`})
+                   {t("Pagos Próximamente", "Payments Coming Soon")}
                 </button>
              </form>
           </div>
