@@ -90,6 +90,22 @@ export default function Admin() {
     }
   };
 
+  const handleResetBooks = () => {
+    if (window.confirm('¿Seguro que quieres borrar todos los registros de libros vendidos?')) {
+      const newSales = sales.filter(s => s.intent !== 'book');
+      localStorage.setItem('nexus_sales', JSON.stringify(newSales));
+      setSales(newSales);
+    }
+  };
+
+  const handleResetSubs = () => {
+    if (window.confirm('¿Seguro que quieres borrar todos los registros de suscripciones?')) {
+      const newSales = sales.filter(s => s.intent === 'book');
+      localStorage.setItem('nexus_sales', JSON.stringify(newSales));
+      setSales(newSales);
+    }
+  };
+
   if (!auth) {
     const currentAdminPass = localStorage.getItem('nexus_admin_pass') || 'nexusadmin';
     return (
@@ -158,8 +174,17 @@ export default function Admin() {
               <p className="text-primary/40 text-xs font-bold uppercase tracking-widest mb-1">Libros Vendidos</p>
               <h3 className="text-4xl font-outfit font-bold">{books.length}</h3>
             </div>
-            <div className="bg-accent/10 text-accent p-4 rounded-2xl">
-              <Book size={24} />
+            <div className="flex flex-col items-end gap-2">
+              <div className="bg-accent/10 text-accent p-4 rounded-2xl">
+                <Book size={24} />
+              </div>
+              <button 
+                onClick={handleResetBooks}
+                className="text-[10px] font-bold text-red-500 hover:text-red-700 flex items-center gap-1 opacity-60 hover:opacity-100 transition-all uppercase tracking-tighter cursor-pointer"
+                title="Resetear lista"
+              >
+                <RefreshCw size={10} /> Resetear
+              </button>
             </div>
           </div>
 
@@ -168,8 +193,17 @@ export default function Admin() {
               <p className="text-primary/40 text-xs font-bold uppercase tracking-widest mb-1">Suscripciones</p>
               <h3 className="text-4xl font-outfit font-bold">{subs.length}</h3>
             </div>
-            <div className="bg-green-50 text-green-600 p-4 rounded-2xl">
-              <Users size={24} />
+            <div className="flex flex-col items-end gap-2">
+              <div className="bg-green-50 text-green-600 p-4 rounded-2xl">
+                <Users size={24} />
+              </div>
+              <button 
+                onClick={handleResetSubs}
+                className="text-[10px] font-bold text-red-500 hover:text-red-700 flex items-center gap-1 opacity-60 hover:opacity-100 transition-all uppercase tracking-tighter cursor-pointer"
+                title="Resetear lista"
+              >
+                <RefreshCw size={10} /> Resetear
+              </button>
             </div>
           </div>
         </div>
@@ -205,12 +239,20 @@ export default function Admin() {
                   </h2>
                   <p className="text-primary/50 text-sm mt-1">Listado histórico de transacciones del libro interactivo.</p>
                 </div>
-                <button
-                  onClick={() => handleExport(books, "ventas_libros")}
-                  className="flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-2xl text-sm font-bold hover:bg-dark transition-all shadow-lg shadow-primary/20"
-                >
-                  <Download size={18} /> Exportar Excel
-                </button>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={() => handleExport(books, "ventas_libros")}
+                    className="flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-2xl text-sm font-bold hover:bg-dark transition-all shadow-lg shadow-primary/20"
+                  >
+                    <Download size={18} /> Exportar Excel
+                  </button>
+                  <button
+                    onClick={handleResetBooks}
+                    className="flex items-center gap-3 px-6 py-3 bg-red-50 text-red-600 border border-red-100 rounded-2xl text-sm font-bold hover:bg-red-100 transition-all"
+                  >
+                    <RefreshCw size={18} /> Resetear Lista
+                  </button>
+                </div>
               </div>
               <div className="overflow-x-auto -mx-8 md:-mx-12 px-8 md:px-12">
                 <table className="w-full text-left whitespace-nowrap">
@@ -253,12 +295,20 @@ export default function Admin() {
                   </h2>
                   <p className="text-primary/50 text-sm mt-1">Gestión de usuarios con soporte activo NEXUS.</p>
                 </div>
-                <button
-                  onClick={() => handleExport(subs, "alta_suscripciones")}
-                  className="flex items-center gap-3 px-6 py-3 bg-green-600 text-white rounded-2xl text-sm font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-600/20"
-                >
-                  <Download size={18} /> Exportar Excel
-                </button>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={() => handleExport(subs, "alta_suscripciones")}
+                    className="flex items-center gap-3 px-6 py-3 bg-green-600 text-white rounded-2xl text-sm font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-600/20"
+                  >
+                    <Download size={18} /> Exportar Excel
+                  </button>
+                  <button
+                    onClick={handleResetSubs}
+                    className="flex items-center gap-3 px-6 py-3 bg-red-50 text-red-600 border border-red-100 rounded-2xl text-sm font-bold hover:bg-red-100 transition-all"
+                  >
+                    <RefreshCw size={18} /> Resetear Lista
+                  </button>
+                </div>
               </div>
               <div className="overflow-x-auto -mx-8 md:-mx-12 px-8 md:px-12">
                 <table className="w-full text-left whitespace-nowrap">
