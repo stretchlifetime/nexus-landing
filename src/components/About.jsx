@@ -22,8 +22,8 @@ export default function About() {
           <div className="font-sans text-primary/80 space-y-6 text-lg md:text-xl leading-relaxed font-light">
             <p>
               {t(
-                "Somos un equipo de profesionales de la salud, médicos y biomédicos que decidimos romper con los mitos tradicionales y las soluciones genéricas del modelo actual.",
-                "We are a team of health professionals, doctors, and bio-scientists who decided to break the traditional myths and generic solutions of the current model."
+                "Somos un equipo de profesionales de la salud que decidimos romper con los mitos tradicionales y las soluciones genéricas del modelo actual.",
+                "We are a team of health professionals who decided to break the traditional myths and generic solutions of the current model."
               )}
             </p>
             <p>
